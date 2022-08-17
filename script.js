@@ -1,5 +1,6 @@
 initTabNav();
 initAccordion();
+initAnimateScroll();
 
 function initTabNav() {
   const tabMenu = document.querySelectorAll(".js-tabmenu li");
@@ -38,5 +39,27 @@ function initAccordion() {
   function activeAccordion() {
     this.classList.toggle("active");
     this.nextElementSibling.classList.toggle("active");
+  }
+}
+
+function initAnimateScroll() {
+  const sections = document.querySelectorAll(".js-scroll");
+
+  if (sections.length) {
+    const windowHalf = window.innerHeight * 0.6;
+
+    function animateScroll() {
+      sections.forEach((section) => {
+        if (!section.classList.contains("active")) {
+          const sectionTop = section.getBoundingClientRect().top;
+          const isSectionVisible = sectionTop - windowHalf < 0;
+          isSectionVisible && section.classList.add("active");
+        }
+      });
+    }
+
+    animateScroll();
+
+    window.addEventListener("scroll", animateScroll);
   }
 }
