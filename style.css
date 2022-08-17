@@ -143,6 +143,7 @@ body {
   margin-top: 2rem;
   margin-bottom: 0.5rem;
   color: #e54;
+  cursor: pointer;
 }
 
 .faq-lista dt::before {
@@ -242,6 +243,25 @@ body {
   animation: show .5s forwards;
 }
 
+.js .js-accordion dd{
+  display: none;
+}
+
+.js-accordion dd.active{
+  display: block;
+  animation: slideDown .5s forwards;
+}
+
+.js-accordion dt::after{
+  content: '▼';
+  margin-left: 10px;
+}
+
+.js-accordion dt.active::after{
+  content: '▲';
+  margin-left: 10px;
+}
+
 @keyframes show {
   from{
     opacity: 0;
@@ -250,5 +270,16 @@ body {
   to{
     opacity: 1;
     transform: translate3d(0, 0,0);
+  }
+}
+
+@keyframes slideDown {
+  from{
+    opacity: 0;
+    max-height: 0;
+  }
+  to{
+    opacity: 1;
+    max-height: 200px;
   }
 }
