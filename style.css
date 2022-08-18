@@ -57,6 +57,10 @@ body {
   letter-spacing: 0.1em;
 }
 
+.menu li:hover{
+  background-color: #faf6ed;
+}
+
 .grid-section {
   grid-column: 2 / 4;
   width: 100%;
