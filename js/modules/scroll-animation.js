@@ -6,11 +6,15 @@ export function initAnimateScroll() {
 
     function animateScroll() {
       sections.forEach((section) => {
-        if (!section.classList.contains("active")) {
           const sectionTop = section.getBoundingClientRect().top;
           const isSectionVisible = sectionTop - windowHalf < 0;
-          isSectionVisible && section.classList.add("active");
-        }
+          const hasSectionActive = section.classList.contains("active");
+
+          if (isSectionVisible) {
+            section.classList.add("active");
+          } else if (hasSectionActive) {
+            section.classList.remove("active");
+          }
       });
     }
 
