@@ -7,6 +7,15 @@ const config = {
     path: path.resolve(__dirname, './'),
     filename: 'index.js',
   },
+  mode: 'development',
+  devServer: {
+    static: {
+      directory: path.join(__dirname, '.'),
+    },
+    open: true,
+    compress: true,
+    port: 9000,
+  },
   module: {
     rules: [
       {
