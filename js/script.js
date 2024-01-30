@@ -1,6 +1,6 @@
 import { Modal } from './modules/modal.js';
 import { TabNav } from './modules/tabnav.js';
-import { initTooltip } from './modules/tooltip.js';
+import { Tooltip } from './modules/tooltip.js';
 import { Accordion } from './modules/accordion.js';
 import { initOperation } from './modules/operation.js';
 import { initMenuMobile } from './modules/menu-mobile.js';
@@ -8,7 +8,6 @@ import { initDropdownMenu } from './modules/dropdown-menu.js';
 import { initAnimateScroll } from './modules/scroll-animation.js';
 import { initAnimateNumbers } from './modules/numbers-animation.js';
 
-initTooltip();
 initOperation();
 initMenuMobile();
 initDropdownMenu();
@@ -23,3 +22,6 @@ tabNav.init();
 
 const modal = new Modal('[data-modal="container"]', '[data-modal="abrir"]', '[data-modal="fechar"]');
 modal.init();
+
+const tooltip = new Tooltip('[data-tooltip]');
+tooltip.init();
