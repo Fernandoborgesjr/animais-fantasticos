@@ -2,28 +2,39 @@ export class AnimateScroll {
   constructor(sections) {
     this.sections = document.querySelectorAll(sections);
     this.windowHalf = window.innerHeight * 0.6;
-    this.animateScroll = this.animateScroll.bind(this);
+    this.checkDistance = this.checkDistance.bind(this);
   }
 
   init() {
     if (this.sections.length) {
-      this.animateScroll();
+      this.getDistance();
+      this.checkDistance();
 
-      window.addEventListener('scroll', this.animateScroll);
+      window.addEventListener('scroll', this.checkDistance);
     }
   }
 
-  animateScroll() {
-    this.sections.forEach((section) => {
-      const sectionTop = section.getBoundingClientRect().top;
-      const isSectionVisible = sectionTop - this.windowHalf < 0;
-      const hasSectionActive = section.classList.contains('active');
+  getDistance() {
+    this.distance = [...this.sections].map((section) => {
+      const { offsetTop } = section;
+      return {
+        element: section,
+        offsetTop: Math.floor(offsetTop - this.windowHalf),
+      };
+    });
+  }
 
-      if (isSectionVisible) {
-        section.classList.add('active');
-      } else if (hasSectionActive) {
-        section.classList.remove('active');
+  checkDistance() {
+    this.distance.forEach(({ element, offsetTop }) => {
+      if (window.scrollY > offsetTop) {
+        element.classList.add('active');
+      } else if (element.classList.contains('active')) {
+        element.classList.remove('active');
       }
     });
+  }
+
+  destroy() {
+    window.removeEventListener('scroll', this.checkDistance);
   }
 }
