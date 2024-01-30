@@ -1,3 +1,5 @@
+import { debounce } from './debounce.js';
+
 export class AnimateScroll {
   constructor(sections) {
     this.sections = document.querySelectorAll(sections);
@@ -10,7 +12,8 @@ export class AnimateScroll {
       this.getDistance();
       this.checkDistance();
 
-      window.addEventListener('scroll', this.checkDistance);
+      const debouncedCheckDistace = debounce(this.checkDistance, 100);
+      window.addEventListener('scroll', debouncedCheckDistace);
     }
   }
 
