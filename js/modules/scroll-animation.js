@@ -1,24 +1,29 @@
-export function initAnimateScroll() {
-  const sections = document.querySelectorAll("[data-anime='scroll']");
-
-  if (sections.length) {
-    animateScroll({ sections });
-
-    window.addEventListener('scroll', () => animateScroll({ sections }));
+export class AnimateScroll {
+  constructor(sections) {
+    this.sections = document.querySelectorAll(sections);
+    this.windowHalf = window.innerHeight * 0.6;
+    this.animateScroll = this.animateScroll.bind(this);
   }
-}
 
-function animateScroll({ sections }) {
-  const windowHalf = window.innerHeight * 0.6;
-  sections.forEach((section) => {
-    const sectionTop = section.getBoundingClientRect().top;
-    const isSectionVisible = sectionTop - windowHalf < 0;
-    const hasSectionActive = section.classList.contains('active');
+  init() {
+    if (this.sections.length) {
+      this.animateScroll();
 
-    if (isSectionVisible) {
-      section.classList.add('active');
-    } else if (hasSectionActive) {
-      section.classList.remove('active');
+      window.addEventListener('scroll', this.animateScroll);
     }
-  });
+  }
+
+  animateScroll() {
+    this.sections.forEach((section) => {
+      const sectionTop = section.getBoundingClientRect().top;
+      const isSectionVisible = sectionTop - this.windowHalf < 0;
+      const hasSectionActive = section.classList.contains('active');
+
+      if (isSectionVisible) {
+        section.classList.add('active');
+      } else if (hasSectionActive) {
+        section.classList.remove('active');
+      }
+    });
+  }
 }
