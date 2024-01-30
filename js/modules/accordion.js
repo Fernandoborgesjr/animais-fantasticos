@@ -10,6 +10,7 @@ export class Accordion {
 
       this.toggle(this.list[0]);
     }
+    return this;
   }
 
   addEvent() {

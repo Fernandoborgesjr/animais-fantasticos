@@ -13,6 +13,7 @@ export class TabNav {
         item.addEventListener('click', () => this.activeTab(index));
       });
     }
+    return this;
   }
 
   activeTab(index) {
