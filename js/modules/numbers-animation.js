@@ -1,33 +1,46 @@
-export function initAnimateNumbers() {
-  const observer = new MutationObserver(handleMutation);
-  const observerTarget = document.querySelector('.numeros');
-  observer.observe(observerTarget, { attributes: true });
+export class AnimateNumbers {
+  constructor(numbers, observerTarget, observerClass) {
+    this.numbers = document.querySelectorAll(numbers);
+    this.observerTarget = document.querySelector(observerTarget);
+    this.observerClass = observerClass;
+    this.handleMutation = this.handleMutation.bind(this);
+  }
 
-  function handleMutation(mutation) {
-    if (mutation[0].target.classList.contains('active')) {
-      observer.disconnect();
-      animate();
+  init() {
+    if (this.numbers.length && this.observerTarget) this.addMutationObserver();
+    return this;
+  }
+
+  handleMutation(mutation) {
+    if (mutation[0].target.classList.contains(this.observerClass)) {
+      this.observer.disconnect();
+      this.animate();
     }
   }
 
-  function animate() {
-    const numbers = document.querySelectorAll('[data-numero]');
+  addMutationObserver() {
+    this.observer = new MutationObserver(this.handleMutation);
+    this.observer.observe(this.observerTarget, { attributes: true });
+  }
 
-    numbers.forEach((number) => {
-      const total = +number.innerText;
+  animate() {
+    this.numbers.forEach(this.constructor.increment);
+  }
 
-      const increment = Math.floor(total / 100);
+  static increment(number) {
+    const total = +number.innerText;
 
-      let start = 0;
+    const increment = Math.floor(total / 100);
 
-      const timer = setInterval(() => {
-        start += increment;
-        number.innerText = start;
-        if (start > total) {
-          number.innerText = total;
-          clearInterval(timer);
-        }
-      }, 25 * Math.random());
-    });
+    let start = 0;
+
+    const timer = setInterval(() => {
+      start += increment;
+      number.innerText = start;
+      if (start > total) {
+        number.innerText = total;
+        clearInterval(timer);
+      }
+    }, 25 * Math.random());
   }
 }
