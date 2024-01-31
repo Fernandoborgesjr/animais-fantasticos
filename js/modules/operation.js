@@ -1,15 +1,42 @@
-export function initOperation() {
-  const operation = document.querySelector('[data-semana]');
-  const weekDays = operation.dataset.semana.split(',').map(Number);
-  const hourly = operation.dataset.horario.split(',').map(Number);
+export class Operation {
+  constructor(operation) {
+    this.operation = document.querySelector(operation);
+  }
 
-  const nowDate = new Date();
-  const nowDay = nowDate.getDay();
-  const nowHourly = nowDate.getHours();
+  data() {
+    this.weekDays = this.operation?.dataset.semana.split(',').map(Number);
+    this.hourly = this.operation?.dataset.horario.split(',').map(Number);
+  }
 
-  const isOpenToday = weekDays.includes(nowDay);
+  nowData() {
+    this.nowDate = new Date();
+    this.nowDay = this.nowDate.getDay();
+    this.nowHourly = this.nowDate.getUTCHours() - 3;
+  }
 
-  const isOpenNow = isOpenToday && nowHourly >= hourly[0] && nowHourly < hourly[1];
+  isOpenToday() {
+    return this.weekDays.includes(this.nowDay);
+  }
 
-  if (isOpenNow) operation.classList.add('open');
+  isOpenNow() {
+    return (
+      this.isOpenToday
+      && this.nowHourly >= this.hourly[0]
+      && this.nowHourly < this.hourly[1]
+    );
+  }
+
+  open() {
+    if (this.isOpenNow) this.operation.classList.add('open');
+  }
+
+  init() {
+    if (this.operation) {
+      this.data();
+      this.nowData();
+      this.open();
+    }
+
+    return this;
+  }
 }

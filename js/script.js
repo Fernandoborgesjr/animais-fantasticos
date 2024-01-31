@@ -2,13 +2,11 @@ import { Modal } from './modules/modal.js';
 import { TabNav } from './modules/tabnav.js';
 import { Tooltip } from './modules/tooltip.js';
 import { Accordion } from './modules/accordion.js';
-import { initOperation } from './modules/operation.js';
+import { Operation } from './modules/operation.js';
 import { MenuMobile } from './modules/menu-mobile.js';
 import { DropdownMenu } from './modules/dropdown-menu.js';
 import { AnimateScroll } from './modules/scroll-animation.js';
 import { AnimateNumbers } from './modules/numbers-animation.js';
-
-initOperation();
 
 const accordion = new Accordion("[data-anime='accordion'] dt");
 accordion.init();
@@ -33,3 +31,6 @@ dropdownMenu.init();
 
 const menuMobile = new MenuMobile('[data-menu="button"]', '[data-menu="list"]');
 menuMobile.init();
+
+const operation = new Operation('[data-semana]');
+operation.init();
