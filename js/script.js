@@ -4,13 +4,12 @@ import { Tooltip } from './modules/tooltip.js';
 import { Accordion } from './modules/accordion.js';
 import { initOperation } from './modules/operation.js';
 import { initMenuMobile } from './modules/menu-mobile.js';
-import { initDropdownMenu } from './modules/dropdown-menu.js';
+import { DropdownMenu } from './modules/dropdown-menu.js';
 import { AnimateScroll } from './modules/scroll-animation.js';
 import { AnimateNumbers } from './modules/numbers-animation.js';
 
 initOperation();
 initMenuMobile();
-initDropdownMenu();
 
 const accordion = new Accordion("[data-anime='accordion'] dt");
 accordion.init();
@@ -29,3 +28,6 @@ animateNumbers.init();
 
 const animateScroll = new AnimateScroll("[data-anime='scroll']");
 animateScroll.init();
+
+const dropdownMenu = new DropdownMenu('[data-dropdown]');
+dropdownMenu.init();
