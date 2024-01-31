@@ -3,13 +3,12 @@ import { TabNav } from './modules/tabnav.js';
 import { Tooltip } from './modules/tooltip.js';
 import { Accordion } from './modules/accordion.js';
 import { initOperation } from './modules/operation.js';
-import { initMenuMobile } from './modules/menu-mobile.js';
+import { MenuMobile } from './modules/menu-mobile.js';
 import { DropdownMenu } from './modules/dropdown-menu.js';
 import { AnimateScroll } from './modules/scroll-animation.js';
 import { AnimateNumbers } from './modules/numbers-animation.js';
 
 initOperation();
-initMenuMobile();
 
 const accordion = new Accordion("[data-anime='accordion'] dt");
 accordion.init();
@@ -31,3 +30,6 @@ animateScroll.init();
 
 const dropdownMenu = new DropdownMenu('[data-dropdown]');
 dropdownMenu.init();
+
+const menuMobile = new MenuMobile('[data-menu="button"]', '[data-menu="list"]');
+menuMobile.init();
