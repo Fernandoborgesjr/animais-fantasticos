@@ -1,6 +1,7 @@
 import { Modal } from './modules/modal.js';
 import { TabNav } from './modules/tabnav.js';
 import { Tooltip } from './modules/tooltip.js';
+import { SlideNav } from './modules/slideNav.js';
 import { Accordion } from './modules/accordion.js';
 import { Operation } from './modules/operation.js';
 import { MenuMobile } from './modules/menu-mobile.js';
@@ -34,3 +35,10 @@ menuMobile.init();
 
 const operation = new Operation('[data-semana]');
 operation.init();
+
+const slideNav = new SlideNav({
+  slide: '.slide',
+  wrapper: '.wrapper',
+});
+
+slideNav.addControl('.custom-controls');
